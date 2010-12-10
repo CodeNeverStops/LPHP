@@ -55,9 +55,9 @@ class LApplication
      */
     public static function run()
     {
-        define('IS_CLI', count($argc) == 1);
-        $controller = IS_CLI?$argv[1]:$_GET['c'];
-        $action = IS_CLI?$argv[2]:$_GET['a'];
+        define('IS_CLI', php_sapi_name() == 'cli');
+        $controller = IS_CLI?$_SERVER['argv'][1]:$_GET['c'];
+        $action = IS_CLI?$_SERVER['argv'][2]:$_GET['a'];
         
         if (empty($controller)) {
             $controller = 'index';
